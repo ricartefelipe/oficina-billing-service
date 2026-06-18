@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-orcamento
+      author: system
+      changes:
+        - createTable:
+            tableName: orcamento
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: os_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: valor_total
+                  type: DECIMAL(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: mp_preference_id
+                  type: VARCHAR(200)
+              - column:
+                  name: mp_payment_id
+                  type: VARCHAR(100)
+              - column:
+                  name: criado_em
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: atualizado_em
+                  type: TIMESTAMP WITH TIME ZONE
