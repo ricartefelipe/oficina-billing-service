@@ -1,4 +1,4 @@
-package br.com.oficina.billing.bdd;
+package br.com.oficina.billing;
 
 import br.com.oficina.billing.application.port.out.BillingEventPublisherPort;
 import br.com.oficina.billing.application.port.out.MercadoPagoPort;
@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @TestConfiguration
-public class TestConfig {
+public class TestApplicationConfig {
 
     @Bean
     @Primary

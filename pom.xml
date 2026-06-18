@@ -25,7 +25,7 @@
     <cucumber.version>7.22.1</cucumber.version>
     <jacoco.version>0.8.14</jacoco.version>
     <testcontainers.version>1.21.4</testcontainers.version>
-    <mercadopago.version>2.1.25</mercadopago.version>
+    <mercadopago.version>3.2.1</mercadopago.version>
     <sonar.projectKey>ricartefelipe_oficina-billing-service</sonar.projectKey>
     <sonar.organization>ricartefelipe</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -151,6 +151,13 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <repositories>
+    <repository>
+      <id>maven-central-direct</id>
+      <url>https://repo1.maven.org/maven2</url>
+    </repository>
+  </repositories>
 
   <build>
     <plugins>
