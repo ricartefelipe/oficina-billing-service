@@ -68,4 +68,17 @@ class MercadoPagoWebhookControllerTest {
 
         verifyNoInteractions(billingService);
     }
+
+    @Test
+    void handleWebhook_semAction_naoDeveProcessar() throws Exception {
+        var payload = new java.util.HashMap<String, Object>();
+        payload.put("action", null);
+
+        mockMvc.perform(post("/webhooks/mercadopago")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(payload)))
+            .andExpect(status().isOk());
+
+        verifyNoInteractions(billingService);
+    }
 }
