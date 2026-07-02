@@ -14,8 +14,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             // CSRF desabilitado intencionalmente: API REST stateless autenticada via JWT/OAuth2 Bearer token.
-            // Sessões HTTP não são utilizadas, portanto ataques CSRF não se aplicam. // NOSONAR
-            .csrf(csrf -> csrf.disable())
+            // Sessões HTTP não são utilizadas, portanto ataques CSRF não se aplicam.
+            .csrf(csrf -> csrf.disable()) // NOSONAR squid:S4502
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/actuator/**").permitAll()
                 .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
