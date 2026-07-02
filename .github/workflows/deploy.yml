@@ -1,0 +1,32 @@
+name: Deploy Kubernetes
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: Tag da imagem Docker
+        default: latest
+        required: true
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@ce2f98cb0f0c7fe6c3e3edd3efb2a99bb09fc55e
+
+      - name: Deploy no Kubernetes
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG_B64 }}
+          IMAGE_TAG: ${{ inputs.image_tag }}
+        run: |
+          echo "$KUBE_CONFIG" | base64 -d > /tmp/kubeconfig
+          export KUBECONFIG=/tmp/kubeconfig
+          kubectl apply -f k8s/ -n oficina
+          kubectl set image deployment/oficina-billing-service \
+            oficina-billing-service=ghcr.io/ricartefelipe/oficina-billing-service:${IMAGE_TAG} \
+            -n oficina
+          kubectl rollout status deployment/oficina-billing-service -n oficina --timeout=120s

@@ -27,7 +27,7 @@ public class MercadoPagoWebhookController {
     @Operation(summary = "Recebe notificações de pagamento do Mercado Pago")
     public ResponseEntity<Void> handleWebhook(@RequestBody Map<String, Object> payload) {
         String action = (String) payload.get("action");
-        log.info("Webhook MercadoPago recebido: action={}", action);
+        log.info("Webhook MercadoPago recebido: action={}", action != null ? action.replaceAll("[^a-zA-Z0-9._-]", "_") : "null");
 
         if ("payment.updated".equals(action) || "payment.created".equals(action)) {
             @SuppressWarnings("unchecked")
